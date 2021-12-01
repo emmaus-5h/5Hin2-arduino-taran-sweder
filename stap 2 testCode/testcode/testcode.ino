@@ -47,8 +47,8 @@ String regelOnder = "";
 // toestanden:
 const int RECHTSAF = 1;
 const int LINKSAF = 2;
-const int VOORUIT = 3;
-const int WACHT = 4;
+const int RIJD = 3;
+const int KIJKT = 4;
 int toestand = RECHTSAF;
 unsigned long toestandStartTijd = 0;
 
@@ -129,15 +129,23 @@ void loop() {
   if (toestand == LINKSAF) {
     if (millis() - toestandStartTijd > 1000) {
       toestandStartTijd = millis();
-      toestand = VOORUIT;
+      toestand = RIJD;
     }
   }
-  if (toestand == VOORUIT) {
+  if (toestand == RIJD) {
     if (millis() - toestandStartTijd > 1000) {
       toestandStartTijd = millis();
-      toestand = WACHT;
+      toestand = KIJKT;
     }
   }
+
+if (toestand==KIJKT){
+  if (afstandR>afstandL){
+    toestand= RECHTSAF;
+    if(afstandL>afstandR)
+    toestand= LINKSAF;
+  }
+}
 
   // bepaal snelheid afhankelijk van toestand
   // snelheid kan 0 t/m 255 zijn
@@ -151,11 +159,11 @@ void loop() {
     snelheidR = 128;
     snelheidL = 0;
   }
-  if (toestand == VOORUIT) {
+  if (toestand == RIJD) {
     snelheidR = 128;
     snelheidL = 128;
   }
-  if (toestand == WACHT) {
+  if (toestand == KIJKT) {
     snelheidR = 0;
     snelheidL = 0;
   }
