@@ -104,7 +104,7 @@ void setup() {
   lcd.setCursor(0, 1); // zet cursor op het begin van de onderste regel
   lcd.print("SETUP");// print demo bericht
   Serial.println("Auto start");
-  delay(2000); // wachttijd om het display te lezen en de auto neer te zetten
+  delay(4000); // wachttijd om het display te lezen en de auto neer te zetten
 
   // zet toestanden en in beginstand
   toestand = RECHTSAF;
@@ -147,9 +147,6 @@ if (toestand==KIJKT){
   }
 }
 
- 
-}
-
   // bepaal snelheid afhankelijk van toestand
   // snelheid kan 0 t/m 255 zijn
   // bij lage getallen (ongeveer onder 100) heeft de motor
@@ -163,8 +160,8 @@ if (toestand==KIJKT){
     snelheidL = 0;
   }
   if (toestand == RIJD) {
-    snelheidR = 200;
-    snelheidL = 200;
+    snelheidR = 158;
+    snelheidL = 158;
   }
   if (toestand == KIJKT) {
     snelheidR = 0;
@@ -176,11 +173,11 @@ if (toestand==KIJKT){
   analogWrite(pinMotorSnelheidR, snelheidR);
   analogWrite(pinMotorSnelheidL, snelheidL);
   // zet tekst op display
-  regelBoven = String(afstandL) + " " +
-               String(afstandM) + "  " +
+  regelBoven = String(afstandL) + "   " +
+               String(afstandM) + "   " +
                String(afstandR) + "   ";
   regelOnder = String(snelheidL) +
-               " HAPPETHEE" + String(toestand) + " " +
+               " the HAPPETHEE" + String(toestand) + " " +
                String(snelheidR) + "      ";
   lcd.setCursor(0, 0); // zet cursor op het begin van de bovenste regel
   lcd.print(regelBoven);
