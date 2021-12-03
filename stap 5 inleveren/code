@@ -1,3 +1,4 @@
+
 /*****************************************
    Auto Startcode
    met toestansdiagrammen
@@ -133,7 +134,7 @@ void loop() {
     }
   }
   if (toestand == RIJD) {
-    if (millis() - toestandStartTijd > 1000) {
+    if (millis() - toestandStartTijd > 5000) {
       toestandStartTijd = millis();
       toestand = KIJKT;
     }
